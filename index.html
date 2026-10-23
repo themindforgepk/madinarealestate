@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madina Estate Agency | Property Dealers Faisalabad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0A2540;
+      --primary-dark: #061525;
+      --accent: #C9A227;
+      --accent-hover: #B8911F;
+      --red-logo: #C9A227;
+      --text: #1a1a1a;
+      --text-light: #5c5c5c;
+      --bg: #f7f8fa;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(10, 37, 64, 0.12);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* TOP BAR */
+    .top-bar {
+      background: var(--primary-dark);
+      color: white;
+      font-size: 0.95rem;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .top-bar a {
+      color: var(--accent);
+      font-weight: 700;
+      margin: 0 6px;
+    }
+    .top-bar a:hover { text-decoration: underline; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-bottom: 20px solid var(--accent);
+    }
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 2px 2px 0 0;
+    }
+    .logo-door {
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 12px;
+      background: white;
+      border-radius: 2px 2px 0 0;
+      z-index: 2;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .logo-text span {
+      display: block;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      position: relative;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: var(--transition);
+    }
+    .nav-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .hamburger span {
+      width: 25px;
+      height: 2.5px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      flex-direction: column;
+      gap: 4px;
+      z-index: 999;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a {
+      padding: 13px 16px;
+      font-weight: 500;
+      border-radius: 8px;
+    }
+    .mobile-menu a:hover { background: #f0f4f8; color: var(--primary); }
+    .mobile-contacts {
+      margin-top: 12px;
+      padding-top: 14px;
+      border-top: 1px solid #eee;
+    }
+    .mobile-contacts a {
+      display: block;
+      font-weight: 700;
+      color: var(--primary);
+      padding: 8px 0;
+      font-size: 1.1rem;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 92vh;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(10,37,64,0.85), rgba(6,21,37,0.92)),
+                  url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      color: white;
+    }
+    .hero-content { max-width: 720px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,162,39,0.2);
+      color: var(--accent);
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      border: 1px solid rgba(201,162,39,0.4);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.12rem;
+      opacity: 0.93;
+      margin-bottom: 20px;
+      max-width: 560px;
+    }
+    .hero-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .hero-services span {
+      background: rgba(255,255,255,0.12);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .zameen-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201,162,39,0.15);
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+      border: 1px solid rgba(201,162,39,0.35);
+      color: #f0e6c0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--primary-dark);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(201,162,39,0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.55);
+      margin-left: 12px;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+      border-color: white;
+    }
+
+    /* SECTIONS */
+    section { padding: 80px 0; }
+    .section-header { text-align: center; margin-bottom: 45px; }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.5rem);
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .section-header p { color: var(--text-light); max-width: 580px; margin: 0 auto; }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .service-card:hover { transform: translateY(-6px); }
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      background: #eef2f7;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .service-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--primary); }
+    .service-card p { font-size: 0.9rem; color: var(--text-light); }
+
+    /* PROPERTIES */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 9px 22px;
+      border-radius: 50px;
+      border: 2px solid #e0e0e0;
+      background: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .properties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 26px;
+    }
+    .property-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .property-card.hidden { display: none; }
+    .property-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(10,37,64,0.15);
+    }
+    .property-img {
+      height: 210px;
+      position: relative;
+      overflow: hidden;
+    }
+    .property-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .property-card:hover .property-img img { transform: scale(1.08); }
+    .property-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--primary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .property-badge.rent { background: #2a9d8f; }
+    .property-badge.sell { background: #c44536; }
+    .property-body { padding: 20px; }
+    .property-price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .property-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
+    .property-meta {
+      display: flex;
+      gap: 14px;
+      color: var(--text-light);
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+    }
+    .property-location { color: var(--text-light); font-size: 0.88rem; }
+
+    /* TRUST */
+    .trust {
+      background: linear-gradient(135deg, var(--primary), #0f3460);
+      color: white;
+      text-align: center;
+      padding: 60px 0;
+    }
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.12);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .trust p { margin-top: 18px; opacity: 0.92; font-size: 1.05rem; }
+
+    /* CONTACT CARD */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .agent-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .agent-avatar {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, var(--primary), #0f3460);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+    .agent-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+    .agent-role {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+    .agent-phones a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f4f8;
+      color: var(--primary);
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: var(--transition);
+      width: 100%;
+    }
+    .agent-phones a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* CONTACT FORM */
+    .contact { background: white; }
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+    .contact-info p { color: var(--text-light); margin-bottom: 24px; }
+    .info-item { display: flex; gap: 14px; margin-bottom: 22px; }
+    .info-icon {
+      width: 46px;
+      height: 46px;
+      background: #eef2f7;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .contact-numbers {
+      margin-top: 6px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .form-card {
+      background: var(--bg);
+      padding: 34px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 7px;
+      font-size: 0.95rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: white;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(10,37,64,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 28px;
+      color: var(--primary);
+    }
+    .form-success.show { display: block; }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary-dark);
+      color: rgba(255,255,255,0.85);
+      padding: 48px 0 28px;
+      text-align: center;
+    }
+    footer .logo { color: white; justify-content: center; margin-bottom: 14px; }
+    footer .logo-text { color: white; }
+    footer p { font-size: 0.9rem; opacity: 0.75; }
+
+    @media (max-width: 900px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .btn-outline { margin-left: 0; margin-top: 12px; }
+      .hero-content .btn {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .hero { min-height: 540px; }
+      .properties-grid { grid-template-columns: 1fr; }
+      .logo-text { font-size: 1.25rem; }
+      .top-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <strong>Call / WhatsApp:</strong>
+    <a href="tel:03001815050">0300 1815050</a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">
+        <div class="logo-icon"><div class="logo-door"></div></div>
+        <div class="logo-text">
+          Madina Estate Agency
+          <span>Property Dealers • Madina Town</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#agents">Contact</a></li>
+        <li><a href="#contact">Appointment</a></li>
+      </ul>
+
+      <a href="#contact" class="nav-cta">Book Appointment</a>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#properties">Properties</a>
+      <a href="#agents">Contact</a>
+      <a href="#trust">Why Us</a>
+      <a href="#contact">Book Appointment</a>
+      <div class="mobile-contacts">
+        <a href="tel:03001815050">0300 1815050</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Premium Location • Madina Town</div>
+        <h1>Madina Estate Agency</h1>
+        <p>Deals in Commercial, Rental, Industrial & Residential Properties. Sale & Purchase experts in Faisalabad.</p>
+
+        <div class="hero-services">
+          <span>Commercial</span>
+          <span>Residential</span>
+          <span>Industrial</span>
+          <span>Rental</span>
+          <span>Sale</span>
+          <span>Purchase</span>
+        </div>
+
+        <div class="zameen-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z"/>
+          </svg>
+          Trusted Agency at zameen.com
+        </div>
+
+        <div>
+          <a href="#contact" class="btn btn-primary">Book an Appointment</a>
+          <a href="#properties" class="btn btn-outline">View Properties</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>What We Deal In</h2>
+        <p>Complete real estate solutions in Madina Town & Faisalabad</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>Commercial</h3>
+          <p>Shops, offices, plazas & commercial plots</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>Residential</h3>
+          <p>Houses, apartments & residential plots</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏭</div>
+          <h3>Industrial</h3>
+          <p>Factories, warehouses & industrial land</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔑</div>
+          <h3>Rental</h3>
+          <p>Houses, shops & offices on rent</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTIES -->
+  <section id="properties">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Properties</h2>
+        <p>Sale, Purchase & Rent options in Faisalabad</p>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="buy">Buy</button>
+        <button clas
